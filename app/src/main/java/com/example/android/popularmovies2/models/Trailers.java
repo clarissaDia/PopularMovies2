@@ -5,15 +5,15 @@ import android.os.Parcelable;
 
 public class Trailers implements Parcelable {
 
-    private int mMovieId;
+
     private String mTrailerName;
     private String mTrailerKey;
     private String mTrailerSite;
     private String mTrailerUrl;
 
 
-    public Trailers (int movieId,String trailerName, String trailerKey, String trailerSite, String trailerUrl){
-        this.mMovieId = movieId;
+    public Trailers (String trailerName, String trailerKey, String trailerSite, String trailerUrl){
+
         this.mTrailerName = trailerName;
         this.mTrailerKey = trailerKey;
         this.mTrailerSite = trailerSite;
@@ -21,7 +21,7 @@ public class Trailers implements Parcelable {
 
     }
 private Trailers (Parcel parcel){
-        mMovieId = parcel.readInt();
+
         mTrailerName = parcel.readString();
         mTrailerKey = parcel.readString();
         mTrailerSite = parcel.readString();
@@ -35,7 +35,7 @@ private Trailers (Parcel parcel){
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeInt(mMovieId);
+
         parcel.writeString(mTrailerName);
 parcel.writeString(mTrailerKey);
 parcel.writeString(mTrailerSite);
@@ -55,9 +55,7 @@ parcel.writeString(mTrailerUrl);
             return new Trailers[i];
         }
     };
-public int getMovieId (){
-    return mMovieId;
-}
+
     public String getTrailerName (){
         return mTrailerName;
     }

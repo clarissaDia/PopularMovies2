@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class NetworkUtils {
     private static final String TAG = NetworkUtils.class.getSimpleName();
     private static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
-    private static final String TRAILER_URL = "https://api.themoviedb.org/3/movie";
+    private static final String TRAILER_URL = "https://api.themoviedb.org/3/movie/";
     private static final String API_KEY = "api_key";
 
     /* Add here your own API key */
@@ -25,9 +25,13 @@ public class NetworkUtils {
     /*trailers endpoints*/
 private static final String TRAILERS = "videos";
 
+
 /*trailer url*/
     private static final String YOUTUBE_BASE_URL = "https://www.youtube.com/watch";
     private static final String YOUTUBE_QUERY_PARAM = "v";
+
+    /*reviews URL*/
+    private static final String REVIEWS = "reviews";
 
     public static URL buildUrl(String sortPopular) {
 
@@ -42,9 +46,9 @@ private static final String TRAILERS = "videos";
         return url;
     }
 
-    public static URL buildTrailer (String id){
+    public static URL buildTrailer (String movieId){
 
-        Uri uri = Uri.parse(TRAILER_URL).buildUpon().appendPath(id).appendPath(TRAILERS)
+        Uri uri = Uri.parse(TRAILER_URL).buildUpon().appendPath(movieId).appendPath(TRAILERS)
                 .appendQueryParameter(API_KEY, MY_API_KEY).build();
         URL url = null;
         try {
@@ -61,6 +65,18 @@ private static final String TRAILERS = "videos";
 
     }
 
+    public static URL buildReviews (String movieId){
+        Uri uri = Uri.parse(BASE_URL).buildUpon().appendPath(movieId).appendPath(REVIEWS)
+                .appendQueryParameter(API_KEY, MY_API_KEY).build();
+        URL url = null;
+        try {
+            url = new URL(uri.toString());
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+        return url;
+
+    }
     public static String getResponseFromUrl(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         try {

@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 public class Movies implements Parcelable {
 
+private  int mMovieId;
     private String mTitle;
     private String mSynopsis;
     private String mReleaseDate;
     private String mAverageVote;
     private String mImage;
 
-    public Movies(String title, String synopsis, String releaseDate, String averageVote, String image) {
+    public Movies(String title, String synopsis, String releaseDate, String averageVote, String image, int movieId) {
 
         this.mTitle = title;
         this.mSynopsis = synopsis;
         this.mReleaseDate = releaseDate;
         this.mAverageVote = averageVote;
         this.mImage = image;
+        this.mMovieId = movieId;
 
     }
 
@@ -27,6 +29,7 @@ public class Movies implements Parcelable {
         mReleaseDate = parcel.readString();
         mAverageVote = parcel.readString();
         mImage = parcel.readString();
+        mMovieId = parcel.readInt();
     }
 
     @Override
@@ -41,6 +44,7 @@ public class Movies implements Parcelable {
         parcel.writeString(mReleaseDate);
         parcel.writeString(mAverageVote);
         parcel.writeString(mImage);
+        parcel.writeInt(mMovieId);
     }
 
     public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
@@ -93,5 +97,9 @@ public class Movies implements Parcelable {
 
     public void setImage(String image) {
         this.mImage = image;
+    }
+
+    public  int getMovieId (){
+        return mMovieId;
     }
 }

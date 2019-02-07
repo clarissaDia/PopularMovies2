@@ -49,7 +49,9 @@ trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (mTrailersList == null)
+            return 0;
+        return mTrailersList.size();
     }
 
     public class TrailersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
