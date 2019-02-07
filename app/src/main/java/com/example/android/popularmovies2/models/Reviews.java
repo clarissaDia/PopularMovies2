@@ -45,7 +45,6 @@ public class Reviews implements Parcelable {
             return new Reviews[i];
         }
     };
-
 public String getAuthor (){
     return mAuthor;
 }

@@ -57,7 +57,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter {
             super(view);
             reviewerName = view.findViewById(R.id.tv_reviewer_name);
             reviewContent = view.findViewById(R.id.tv_review_content);
-
         }
     }
 }
