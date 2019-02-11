@@ -4,15 +4,19 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.popularmovies2.adapters.ReviewsAdapter;
 import com.example.android.popularmovies2.adapters.TrailersAdapter;
+import com.example.android.popularmovies2.database.AppDataBase;
 import com.example.android.popularmovies2.models.Movies;
 import com.example.android.popularmovies2.models.Reviews;
 import com.example.android.popularmovies2.models.Trailers;
@@ -35,6 +39,10 @@ private ArrayList<Trailers> trailers;
     private RecyclerView mReviewsRecyclerView;
     private ReviewsAdapter mAdapter;
 
+    private AppDataBase mDb;
+
+    private FloatingActionButton favoriteFab;
+    private boolean isClicked;
 
 
 
@@ -60,6 +68,9 @@ private ArrayList<Trailers> trailers;
         reviews = new ArrayList<>();
         mReviewsRecyclerView = (RecyclerView) findViewById(R.id.rv_reviews_detail);
 
+        mDb = AppDataBase.getInstance(this);
+
+
 
         Intent intent = getIntent();
 
@@ -75,13 +86,19 @@ private ArrayList<Trailers> trailers;
             loadTrailers(trailersUrl);
             URL reviewsUrl = NetworkUtils.buildReviews(movieId);
             loadReviews(reviewsUrl);
+            favoriteFab = findViewById(R.id.fab_favorite);
+            favoriteFab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
 
         }
 
 
-        LinearLayoutManager trailersLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,
-                false);
+        GridLayoutManager trailersLayoutManager = new GridLayoutManager(this,2);
         mTrailersRecyclerView.setLayoutManager(trailersLayoutManager);
         mTrailersRecyclerView.setHasFixedSize(true);
 
@@ -94,6 +111,9 @@ private ArrayList<Trailers> trailers;
 
 
     }
+
+
+
     public void loadTrailers (URL url){
         new fetchTrailers().execute(url);
 
@@ -162,4 +182,9 @@ private ArrayList<Trailers> trailers;
 
         }
     }
+
+
+
+
+
     }

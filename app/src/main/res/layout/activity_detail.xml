@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,13 +14,34 @@
         android:orientation="vertical"
         tools:context=".DetailActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <ImageView
             android:id="@+id/iv_detail_image"
             android:layout_width="@dimen/detail_image_width"
             android:layout_height="@dimen/detail_image_height"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/activity_margin" />
+            android:layout_marginTop="@dimen/activity_margin"
+            />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mark as favrite"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_favorite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_margin="25dp">
+        </android.support.design.widget.FloatingActionButton>
+
+    </LinearLayout>
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
@@ -28,16 +50,8 @@
             android:textSize="@dimen/title_text_size"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tv_synopsis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
-            android:textSize="@dimen/text_size" />
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -68,20 +82,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size" />
-
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        <TextView
+            android:id="@+id/tv_synopsis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:textSize="@dimen/text_size" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/watch_trailer"/>
+
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_trailers_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reviews"
+            android:textAllCaps="true"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_reviews_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </ScrollView>

@@ -1,16 +1,28 @@
 package com.example.android.popularmovies2.models;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+@Entity(tableName = "movies_table")
 public class Movies implements Parcelable {
 
+    @ColumnInfo(name = "movie_id")
 private  int mMovieId;
+    @ColumnInfo(name = "title")
     private String mTitle;
+    @ColumnInfo(name = "synopsis")
     private String mSynopsis;
+    @ColumnInfo(name = "release_date")
     private String mReleaseDate;
+    @ColumnInfo (name = "average_vote")
     private String mAverageVote;
+    @ColumnInfo(name = "image")
     private String mImage;
+    @PrimaryKey(autoGenerate = true)
+    private int dataBaseId;
 
     public Movies(String title, String synopsis, String releaseDate, String averageVote, String image, int movieId) {
 
@@ -59,6 +71,13 @@ private  int mMovieId;
         }
     };
 
+    public int getDataBaseId (){
+        return dataBaseId;
+    }
+public void setDataBaseId(int dataBaseId){
+        this.dataBaseId = dataBaseId;
+
+}
     public String getTitle() {
         return mTitle;
     }
@@ -101,5 +120,8 @@ private  int mMovieId;
 
     public  int getMovieId (){
         return mMovieId;
+    }
+    public void setMovieId (int movieId){
+        this.mMovieId = movieId;
     }
 }

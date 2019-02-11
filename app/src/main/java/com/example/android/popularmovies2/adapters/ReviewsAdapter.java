@@ -10,17 +10,15 @@ import android.widget.TextView;
 
 import com.example.android.popularmovies2.R;
 import com.example.android.popularmovies2.models.Reviews;
+import com.example.android.popularmovies2.models.Trailers;
 
 import java.util.ArrayList;
 
-public class ReviewsAdapter extends RecyclerView.Adapter {
+public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsViewHolder> {
     private ArrayList<Reviews> mReviewsList;
     Context context;
 
-
-
-    public ReviewsAdapter (ArrayList<Reviews> reviews){
-
+    public ReviewsAdapter(ArrayList<Reviews> reviews) {
         mReviewsList = reviews;
 
     }
@@ -36,9 +34,12 @@ public class ReviewsAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
+    public void onBindViewHolder(@NonNull ReviewsAdapter.ReviewsViewHolder reviewsViewHolder, int i) {
+        Reviews reviews = mReviewsList.get(i);
+        reviewsViewHolder.reviewerName.setText(reviews.getAuthor());
+        reviewsViewHolder.reviewContent.setText(reviews.getContent());
     }
+
 
     @Override
     public int getItemCount() {
@@ -48,15 +49,18 @@ public class ReviewsAdapter extends RecyclerView.Adapter {
         return mReviewsList.size();
     }
 
-    public class ReviewsViewHolder extends RecyclerView.ViewHolder{
+
+    public class ReviewsViewHolder extends RecyclerView.ViewHolder {
 
         final TextView reviewerName;
         final TextView reviewContent;
 
-        ReviewsViewHolder (View view){
+        ReviewsViewHolder(View view) {
             super(view);
             reviewerName = view.findViewById(R.id.tv_reviewer_name);
             reviewContent = view.findViewById(R.id.tv_review_content);
         }
+
     }
 }
+
