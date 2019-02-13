@@ -2,8 +2,8 @@
 <resources>
     <dimen name="title_text_size">25sp</dimen>
     <dimen name="activity_margin">10dp</dimen>
-    <dimen name="image_width">200dp</dimen>
-    <dimen name="image_height">300dp</dimen>
+    <dimen name="image_width">150dp</dimen>
+    <dimen name="image_height">200dp</dimen>
     <dimen name="text_size">15sp</dimen>
     <dimen name="detail_image_width">150dp</dimen>
     <dimen name="detail_image_height">200dp</dimen>

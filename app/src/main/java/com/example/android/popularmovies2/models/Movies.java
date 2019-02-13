@@ -2,6 +2,7 @@ package com.example.android.popularmovies2.models;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -23,6 +24,18 @@ private  int mMovieId;
     private String mImage;
     @PrimaryKey(autoGenerate = true)
     private int dataBaseId;
+
+    @Ignore
+    public Movies(String title, String synopsis, String releaseDate, String averageVote, String image) {
+
+        this.mTitle = title;
+        this.mSynopsis = synopsis;
+        this.mReleaseDate = releaseDate;
+        this.mAverageVote = averageVote;
+        this.mImage = image;
+
+
+    }
 
     public Movies(String title, String synopsis, String releaseDate, String averageVote, String image, int movieId) {
 
@@ -86,11 +99,12 @@ public void setDataBaseId(int dataBaseId){
         this.mTitle = title;
     }
 
-    public String getOverView() {
+    public String getSynopsis() {
+
         return mSynopsis;
     }
 
-    public void setOverView(String synopsis) {
+    public void setSynopsis(String synopsis) {
         this.mSynopsis = synopsis;
     }
 
@@ -102,11 +116,11 @@ public void setDataBaseId(int dataBaseId){
         this.mReleaseDate = releaseDate;
     }
 
-    public String getVote() {
+    public String getAverageVote() {
         return mAverageVote;
     }
 
-    public void setVote(String averageVote) {
+    public void setAverageVote(String averageVote) {
         this.mAverageVote = averageVote;
     }
 
