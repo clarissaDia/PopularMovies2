@@ -26,9 +26,11 @@ public class NetworkUtils {
 private static final String TRAILERS = "videos";
 
 
-/*trailer url*/
+    /*youtube url*/
     private static final String YOUTUBE_BASE_URL = "https://www.youtube.com/watch";
     private static final String YOUTUBE_QUERY_PARAM = "v";
+    private static final String YOUTUBE_PREVIEW = "https://img.youtube.com/vi/";
+    private static final String YOUTUBE_JPG = "0.jpg";
 
     /*reviews URL*/
     private static final String REVIEWS = "reviews";
@@ -63,6 +65,12 @@ private static final String TRAILERS = "videos";
         Uri uri = Uri.parse(YOUTUBE_BASE_URL).buildUpon().appendQueryParameter(YOUTUBE_QUERY_PARAM, trailerkey).build();
         return uri.toString();
 
+    }
+
+    public static String buildYoutubePreview(String movieId) {
+        Uri uri = Uri.parse(YOUTUBE_PREVIEW).buildUpon().appendEncodedPath(movieId)
+                .appendPath(YOUTUBE_JPG).build();
+        return uri.toString();
     }
 
     public static URL buildReviews (String movieId){

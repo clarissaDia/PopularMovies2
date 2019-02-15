@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.android.popularmovies2.models.Movies;
 import com.example.android.popularmovies2.R;
+import com.example.android.popularmovies2.models.Movies;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -24,8 +24,7 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.PosterView
         void onClick(int posterPosition);
     }
 
-    public PosterAdapter(ArrayList<Movies> movies, PosterClickListener clickListener) {
-        mMoviesList = movies;
+    public PosterAdapter(PosterClickListener clickListener) {
         mPosterClick = clickListener;
     }
 
@@ -59,6 +58,11 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.PosterView
     public int getItemCount() {
         if (mMoviesList == null) return 0;
         return mMoviesList.size();
+    }
+
+    public void setMoviesList(ArrayList<Movies> arrayList) {
+        mMoviesList = arrayList;
+        notifyDataSetChanged();
     }
 
     public class PosterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

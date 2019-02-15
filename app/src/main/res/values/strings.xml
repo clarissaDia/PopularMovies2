@@ -6,5 +6,6 @@
     <string name="sort_top_rated">Top rated</string>
     <string name="errorMessage">Error while loading movies</string>
     <string name="watch_trailer">Watch Trailer</string>
+    <string name="reviews">Reviews</string>
 
 </resources>

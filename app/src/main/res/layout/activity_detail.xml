@@ -14,24 +14,16 @@
         android:orientation="vertical"
         tools:context=".DetailActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
         <ImageView
             android:id="@+id/iv_detail_image"
             android:layout_width="@dimen/detail_image_width"
             android:layout_height="@dimen/detail_image_height"
             android:layout_marginTop="@dimen/activity_margin"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="mark as favrite"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"/>
+            android:layout_gravity="center" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_favorite"
@@ -41,8 +33,7 @@
             android:layout_gravity="right"
             android:src="@drawable/heart_favorite_border_black">
         </android.support.design.widget.FloatingActionButton>
-
-    </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_title"
@@ -94,28 +85,45 @@
             android:layout_marginRight="@dimen/activity_margin"
             android:textSize="@dimen/text_size" />
 
-        <TextView
-            android:id="@+id/tv_watch_trailers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/watch_trailer"/>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_trailers_detail"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tv_watch_trailers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:textSize="@dimen/trailers_review_size"
+                android:textStyle="bold"
+                android:text="@string/watch_trailer"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_trailers_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reviews"
-            android:textAllCaps="true"/>
+            android:text="@string/reviews"
+            android:textAllCaps="true"
+            android:textSize="@dimen/trailers_review_size"
+            android:textStyle="bold" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_reviews_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

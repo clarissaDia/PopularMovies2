@@ -10,14 +10,16 @@ public class Trailers implements Parcelable {
     private String mTrailerKey;
     private String mTrailerSite;
     private String mTrailerUrl;
+    private String mImage;
 
 
-    public Trailers (String trailerName, String trailerKey, String trailerSite, String trailerUrl){
+    public Trailers(String trailerName, String trailerKey, String trailerSite, String trailerUrl, String image) {
 
         this.mTrailerName = trailerName;
         this.mTrailerKey = trailerKey;
         this.mTrailerSite = trailerSite;
         this.mTrailerUrl = trailerUrl;
+        this.mImage = image;
 
     }
 private Trailers (Parcel parcel){
@@ -26,6 +28,7 @@ private Trailers (Parcel parcel){
         mTrailerKey = parcel.readString();
         mTrailerSite = parcel.readString();
         mTrailerUrl = parcel.readString();
+    mImage = parcel.readString();
 
 }
     @Override
@@ -40,6 +43,7 @@ private Trailers (Parcel parcel){
 parcel.writeString(mTrailerKey);
 parcel.writeString(mTrailerSite);
 parcel.writeString(mTrailerUrl);
+        parcel.writeString(mImage);
 
     }
 
@@ -70,6 +74,10 @@ parcel.writeString(mTrailerUrl);
 
     public String getTrailerUrl (){
         return mTrailerUrl;
+    }
+
+    public String getTrailerImage() {
+        return mImage;
     }
 
 }

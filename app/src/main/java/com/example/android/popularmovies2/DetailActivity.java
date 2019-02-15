@@ -5,10 +5,10 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -139,7 +139,6 @@ click();
                 @Override
                 public void run() {
                     mDb.moviesDao().removeMovie(movies.getMovieId());
-                    favoriteFab.setImageResource(R.drawable.heart_favorite_border_black);
 
                 }
             });
@@ -149,7 +148,7 @@ click();
             @Override
             public void run() {
                 mDb.moviesDao().addMovie(movies);
-                favoriteFab.setImageResource(R.drawable.heart_favorite_black);
+
             }
         });
             Toast.makeText(this, "added", Toast.LENGTH_LONG).show();

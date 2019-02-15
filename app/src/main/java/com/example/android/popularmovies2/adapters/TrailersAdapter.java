@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.popularmovies2.R;
 import com.example.android.popularmovies2.models.Trailers;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,8 +44,9 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
     public void onBindViewHolder(@NonNull TrailersAdapter.TrailersViewHolder trailersViewHolder, int i) {
 Trailers trailers = mTrailersList.get(i);
 trailersViewHolder.trailerName.setText(trailers.getTrailerName());
-trailersViewHolder.trailerKey.setText(trailers.getTrailerKey());
 trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
+        String moviepreview = trailers.getTrailerImage();
+        Picasso.get().load(moviepreview).into(trailersViewHolder.trailerpreview);
 
     }
 
@@ -56,16 +59,18 @@ trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
 
     public class TrailersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
+
         final TextView trailerName;
-        final TextView trailerKey;
         final TextView trailerSite;
+        final ImageView trailerpreview;
 
 
         TrailersViewHolder (View itemView){
             super(itemView);
+
             trailerName = itemView.findViewById(R.id.tv_trailer_name);
-            trailerKey = itemView.findViewById(R.id.tv_trailer_key);
             trailerSite = itemView.findViewById(R.id.tv_trailer_site);
+            trailerpreview = itemView.findViewById(R.id.iv_trailer_preview);
 
             itemView.setOnClickListener(this);
 
@@ -77,8 +82,6 @@ trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
             int position = getAdapterPosition();
             Trailers trailers = mTrailersList.get(position);
             mTrailerClick.onItemClick(trailers);
-
-
 
         }
     }

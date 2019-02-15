@@ -75,13 +75,15 @@ public class JsonUtils {
                     String trailerKey;
                     String trailerSite;
                     String trailerLink;
+                    String trailerImage;
 
                     JSONObject trailer = trailersResults.getJSONObject(i);
                     trailerName = trailer.getString(TRAILER_NAME);
                     trailerKey = trailer.getString(TRAILER_KEY);
                     trailerSite = trailer.getString(SITE);
                     trailerLink = NetworkUtils.buildYoutubeUrl(trailerKey);
-                    trailersList.add(new Trailers(trailerName, trailerKey, trailerSite, trailerLink));
+                    trailerImage = NetworkUtils.buildYoutubePreview(trailerKey);
+                    trailersList.add(new Trailers(trailerName, trailerKey, trailerSite, trailerLink, trailerImage));
 
                 }
             }
