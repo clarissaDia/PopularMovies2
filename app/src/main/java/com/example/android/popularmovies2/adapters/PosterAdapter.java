@@ -21,7 +21,7 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.PosterView
     final private PosterClickListener mPosterClick;
 
     public interface PosterClickListener {
-        void onClick(int posterPosition);
+        void onClick(Movies movies);
     }
 
     public PosterAdapter(PosterClickListener clickListener) {
@@ -78,7 +78,9 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.PosterView
 
         @Override
         public void onClick(View poster) {
-            mPosterClick.onClick(getAdapterPosition());
+            int position = getAdapterPosition();
+            Movies movies = mMoviesList.get(position);
+            mPosterClick.onClick(movies);
 
         }
     }
