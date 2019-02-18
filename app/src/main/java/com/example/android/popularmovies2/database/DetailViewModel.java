@@ -11,11 +11,8 @@ public class DetailViewModel extends ViewModel {
     public DetailViewModel (AppDataBase appDataBase, int movieId){
 
         movies = appDataBase.moviesDao().getMovie(movieId);
-
     }
-
     public LiveData<Movies> getMovie (){
         return movies;
     }
 }
-

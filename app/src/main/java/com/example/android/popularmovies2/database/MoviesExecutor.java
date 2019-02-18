@@ -5,7 +5,6 @@ import android.os.Looper;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.logging.LogRecord;
 
 public class MoviesExecutor {
 
@@ -21,8 +20,6 @@ public class MoviesExecutor {
         this.diskIO = diskIO;
         this.networkIO = networkIO;
         this.mainThread = mainThread;
-
-
     }
 
     public static MoviesExecutor getInstance(){
@@ -56,4 +53,4 @@ private static class MainThreadExecutor implements Executor{
         mainThreadHandler.post(command);
     }
 }
-    }
+}

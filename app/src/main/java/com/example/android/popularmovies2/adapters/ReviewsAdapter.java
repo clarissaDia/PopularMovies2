@@ -10,17 +10,15 @@ import android.widget.TextView;
 
 import com.example.android.popularmovies2.R;
 import com.example.android.popularmovies2.models.Reviews;
-import com.example.android.popularmovies2.models.Trailers;
 
 import java.util.ArrayList;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsViewHolder> {
-    private ArrayList<Reviews> mReviewsList;
     Context context;
+    private ArrayList<Reviews> mReviewsList;
 
     public ReviewsAdapter(ArrayList<Reviews> reviews) {
         mReviewsList = reviews;
-
     }
 
     @NonNull
@@ -40,7 +38,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
         reviewsViewHolder.reviewContent.setText(reviews.getContent());
     }
 
-
     @Override
     public int getItemCount() {
         if (mReviewsList == null)
@@ -48,7 +45,6 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
 
         return mReviewsList.size();
     }
-
 
     public class ReviewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -60,7 +56,5 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewsV
             reviewerName = view.findViewById(R.id.tv_reviewer_name);
             reviewContent = view.findViewById(R.id.tv_review_content);
         }
-
     }
 }
-

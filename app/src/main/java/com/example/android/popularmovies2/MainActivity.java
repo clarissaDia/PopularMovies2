@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements PosterAdapter.Pos
     private MoviesViewModel moviesViewModel;
     private PosterAdapter adapter;
     private Bundle bundle;
+    private TextView mNoFavoriteTextView;
 
 
     @Override
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements PosterAdapter.Pos
 
         mErrorTextView = (TextView) findViewById(R.id.tv_error);
         mProgressbar = (ProgressBar) findViewById(R.id.pb_loading);
+        mNoFavoriteTextView = (TextView) findViewById(R.id.tv_no_favorite);
+
 
         if (savedInstanceState != null) {
             final ArrayList<Movies> moviesArrayList = savedInstanceState.getParcelableArrayList("SAVE_INSTANCE");
@@ -67,24 +70,25 @@ public class MainActivity extends AppCompatActivity implements PosterAdapter.Pos
                             if (favoriteList.isEmpty()) {
                                 showMoviesError();
                             }
+                            adapter.setMoviesList(moviesArrayList);
 
                         } else {
                             adapter.setMoviesList(moviesArrayList);
                         }
                     }
-
                 }
             });
+            showMoviesDataView();
 
         } else {
             loadMovies();
-
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList("SAVE_INSTANCE", moviesArrayList);
+        ArrayList<Movies> arrayList = adapter.getmoviesArraylist();
+        outState.putParcelableArrayList("SAVE_INSTANCE", arrayList);
         super.onSaveInstanceState(outState);
 
     }
@@ -95,8 +99,6 @@ public class MainActivity extends AppCompatActivity implements PosterAdapter.Pos
 
         bundle = new Bundle();
         bundle.putParcelableArrayList("bundle", moviesArrayList);
-
-
     }
 
     @Override
@@ -112,20 +114,20 @@ public class MainActivity extends AppCompatActivity implements PosterAdapter.Pos
                         final ArrayList<Movies> favoriteList = new ArrayList<>(movies);
                         if (favoriteList.equals(moviesArrayList)) {
                             if (favoriteList.isEmpty()) {
-                                showMoviesError();
+                                noFavoriteAdded();
                             }
                             adapter.setMoviesList(moviesArrayList);
 
                         } else {
-                            adapter.setMoviesList(moviesArrayList);
+                            adapter.getmoviesArraylist();
+                            mRecyclerView.setAdapter(adapter);
                         }
                     }
-
                 }
             });
-            showMoviesDataView();
 
         }
+        showMoviesDataView();
     }
 
     private void loadMovies() {
@@ -139,12 +141,34 @@ public class MainActivity extends AppCompatActivity implements PosterAdapter.Pos
         mRecyclerView.setVisibility(View.VISIBLE);
     }
 
-
     private void showMoviesError() {
         mRecyclerView.setVisibility(View.INVISIBLE);
         mErrorTextView.setVisibility(View.VISIBLE);
     }
 
+    private void noFavoriteAdded() {
+        mRecyclerView.setVisibility(View.INVISIBLE);
+        mNoFavoriteTextView.setVisibility(View.VISIBLE);
+    }
+
+
+    private void loadFavorites() {
+        moviesViewModel.getFavoriteMovies().observe(MainActivity.this, new Observer<List<Movies>>() {
+            @Override
+            public void onChanged(@Nullable List<Movies> movies) {
+                if (movies != null) {
+                    final ArrayList<Movies> moviesArrayList = new ArrayList<>(movies);
+
+                    if (moviesArrayList.isEmpty()) {
+                        noFavoriteAdded();
+                    }
+                    adapter.setMoviesList(moviesArrayList);
+                    mRecyclerView.setAdapter(adapter);
+                }
+
+            }
+        });
+    }
 
     @Override
     public void onClick(Movies movies) {
@@ -170,24 +194,8 @@ public class MainActivity extends AppCompatActivity implements PosterAdapter.Pos
                 return true;
             case R.id.sort_by_favorite:
 
-                moviesViewModel.getFavoriteMovies().observe(MainActivity.this, new Observer<List<Movies>>() {
-                    @Override
-                    public void onChanged(@Nullable List<Movies> movies) {
-                        if (movies != null) {
-                            final ArrayList<Movies> moviesArrayList = new ArrayList<>(movies);
-
-                            if (moviesArrayList.isEmpty()) {
-                                showMoviesError();
-                            }
-                            adapter.setMoviesList(moviesArrayList);
-                            mRecyclerView.setAdapter(adapter);
-                        }
-
-                    }
-                });
+                loadFavorites();
                 return true;
-
-
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -10,20 +10,16 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class NetworkUtils {
+    public static final String SORT_POPULAR = "popular";
+    public static final String SORT_TOP_RATED = "top_rated";
     private static final String TAG = NetworkUtils.class.getSimpleName();
     private static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
     private static final String TRAILER_URL = "https://api.themoviedb.org/3/movie/";
     private static final String API_KEY = "api_key";
-
     /* Add here your own API key */
     private static final String MY_API_KEY = "";
-
-    public static final String SORT_POPULAR = "popular";
-    public static final String SORT_TOP_RATED = "top_rated";
-
-
     /*trailers endpoints*/
-private static final String TRAILERS = "videos";
+    private static final String TRAILERS = "videos";
 
 
     /*youtube url*/
@@ -48,20 +44,20 @@ private static final String TRAILERS = "videos";
         return url;
     }
 
-    public static URL buildTrailer (String movieId){
+    public static URL buildTrailer(String movieId) {
 
         Uri uri = Uri.parse(TRAILER_URL).buildUpon().appendPath(movieId).appendPath(TRAILERS)
                 .appendQueryParameter(API_KEY, MY_API_KEY).build();
         URL url = null;
         try {
             url = new URL(uri.toString());
-        }catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;
     }
 
-    public static String buildYoutubeUrl (String trailerkey){
+    public static String buildYoutubeUrl(String trailerkey) {
         Uri uri = Uri.parse(YOUTUBE_BASE_URL).buildUpon().appendQueryParameter(YOUTUBE_QUERY_PARAM, trailerkey).build();
         return uri.toString();
 
@@ -73,18 +69,19 @@ private static final String TRAILERS = "videos";
         return uri.toString();
     }
 
-    public static URL buildReviews (String movieId){
+    public static URL buildReviews(String movieId) {
         Uri uri = Uri.parse(BASE_URL).buildUpon().appendPath(movieId).appendPath(REVIEWS)
                 .appendQueryParameter(API_KEY, MY_API_KEY).build();
         URL url = null;
         try {
             url = new URL(uri.toString());
-        }catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;
 
     }
+
     public static String getResponseFromUrl(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         try {

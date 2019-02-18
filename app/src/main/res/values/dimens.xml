@@ -8,4 +8,5 @@
     <dimen name="trailers_review_size">20sp</dimen>
     <dimen name="detail_image_width">150dp</dimen>
     <dimen name="detail_image_height">200dp</dimen>
+    <dimen name="fab_margin">25dp</dimen>
 </resources>

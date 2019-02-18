@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/iv_trailer_preview"
@@ -11,14 +11,14 @@
         android:layout_height="wrap_content" />
 
     <TextView
+        android:id="@+id/tv_trailer_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_trailer_name"
-        android:textSize="@dimen/text_size"/>
+        android:textSize="@dimen/text_size" />
 
     <TextView
+        android:id="@+id/tv_trailer_site"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_trailer_site"
-        android:textSize="@dimen/text_size"/>
+        android:textSize="@dimen/text_size" />
 </LinearLayout>

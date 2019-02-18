@@ -4,8 +4,12 @@
     <string name="rate">Rate:</string>
     <string name="sort_popular">Most popular</string>
     <string name="sort_top_rated">Top rated</string>
+    <string name="sort_by_favorite">Favorite Movies</string>
     <string name="errorMessage">Error while loading movies</string>
     <string name="watch_trailer">Watch Trailer</string>
     <string name="reviews">Reviews</string>
-
+    <string name="added">Added to Favorite Movies</string>
+    <string name="removed">Removed from Favorite Movies</string>
+    <string name="no_reviews">No Reviews available</string>
+    <string name="no_favorite">No movies added</string>
 </resources>

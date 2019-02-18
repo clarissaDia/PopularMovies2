@@ -16,18 +16,14 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.TrailersViewHolder> {
-    private ArrayList<Trailers> mTrailersList;
     final private TrailerClickListener mTrailerClick;
     Context context;
-
-    public interface TrailerClickListener {
-        void onItemClick(Trailers trailers);
-    }
+    private ArrayList<Trailers> mTrailersList;
 
     public TrailersAdapter(ArrayList<Trailers> trailers, TrailerClickListener clickListener) {
         mTrailersList = trailers;
-        mTrailerClick = clickListener;}
-
+        mTrailerClick = clickListener;
+    }
 
     @NonNull
     @Override
@@ -37,17 +33,15 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
         context = viewGroup.getContext();
         View view = inflater.inflate(R.layout.trailers_list_item, viewGroup, attachToParentImmediately);
         return new TrailersViewHolder(view);
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull TrailersAdapter.TrailersViewHolder trailersViewHolder, int i) {
-Trailers trailers = mTrailersList.get(i);
-trailersViewHolder.trailerName.setText(trailers.getTrailerName());
-trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
+        Trailers trailers = mTrailersList.get(i);
+        trailersViewHolder.trailerName.setText(trailers.getTrailerName());
+        trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
         String moviepreview = trailers.getTrailerImage();
         Picasso.get().load(moviepreview).into(trailersViewHolder.trailerpreview);
-
     }
 
     @Override
@@ -57,7 +51,11 @@ trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
         return mTrailersList.size();
     }
 
-    public class TrailersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public interface TrailerClickListener {
+        void onItemClick(Trailers trailers);
+    }
+
+    public class TrailersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
         final TextView trailerName;
@@ -65,7 +63,7 @@ trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
         final ImageView trailerpreview;
 
 
-        TrailersViewHolder (View itemView){
+        TrailersViewHolder(View itemView) {
             super(itemView);
 
             trailerName = itemView.findViewById(R.id.tv_trailer_name);
@@ -73,7 +71,6 @@ trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
             trailerpreview = itemView.findViewById(R.id.iv_trailer_preview);
 
             itemView.setOnClickListener(this);
-
         }
 
         @Override
@@ -82,7 +79,6 @@ trailersViewHolder.trailerSite.setText(trailers.getTrailerSite());
             int position = getAdapterPosition();
             Trailers trailers = mTrailersList.get(position);
             mTrailerClick.onItemClick(trailers);
-
         }
     }
 }

@@ -65,6 +65,10 @@ public class PosterAdapter extends RecyclerView.Adapter<PosterAdapter.PosterView
         notifyDataSetChanged();
     }
 
+    public ArrayList<Movies> getmoviesArraylist() {
+        return mMoviesList;
+    }
+
     public class PosterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         final ImageView imageViewHolder;

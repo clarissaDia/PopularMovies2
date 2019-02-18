@@ -5,35 +5,7 @@ import android.os.Parcelable;
 
 public class Reviews implements Parcelable {
 
-    private final String mAuthor;
-    private final String mContent;
-
-    public Reviews (String author, String content){
-        mAuthor = author;
-        mContent = content;
-    }
-
-    private Reviews (Parcel parcel){
-        mAuthor = parcel.readString();
-        mContent = parcel.readString();
-
-    }
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-
-        parcel.writeString(mAuthor);
-        parcel.writeString(mContent);
-
-    }
-
-    public static final Parcelable.Creator<Reviews> CREATOR = new Parcelable.Creator<Reviews>(){
+    public static final Parcelable.Creator<Reviews> CREATOR = new Parcelable.Creator<Reviews>() {
 
         @Override
         public Reviews createFromParcel(Parcel parcel) {
@@ -45,6 +17,30 @@ public class Reviews implements Parcelable {
             return new Reviews[i];
         }
     };
+    private final String mAuthor;
+    private final String mContent;
+
+    public Reviews (String author, String content){
+        mAuthor = author;
+        mContent = content;
+    }
+
+    private Reviews (Parcel parcel){
+        mAuthor = parcel.readString();
+        mContent = parcel.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int flags) {
+
+        parcel.writeString(mAuthor);
+        parcel.writeString(mContent);
+    }
 
 public String getAuthor (){
     return mAuthor;

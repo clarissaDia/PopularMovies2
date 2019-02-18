@@ -10,6 +10,17 @@ import android.os.Parcelable;
 @Entity(tableName = "movies_table")
 public class Movies implements Parcelable {
 
+    public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
+        @Override
+        public Movies createFromParcel(Parcel parcel) {
+            return new Movies(parcel);
+        }
+
+        @Override
+        public Movies[] newArray(int i) {
+            return new Movies[i];
+        }
+    };
     @ColumnInfo(name = "movie_id")
 private  int mMovieId;
     @ColumnInfo(name = "title")
@@ -71,18 +82,6 @@ private  int mMovieId;
         parcel.writeString(mImage);
         parcel.writeInt(mMovieId);
     }
-
-    public static final Parcelable.Creator<Movies> CREATOR = new Parcelable.Creator<Movies>() {
-        @Override
-        public Movies createFromParcel(Parcel parcel) {
-            return new Movies(parcel);
-        }
-
-        @Override
-        public Movies[] newArray(int i) {
-            return new Movies[i];
-        }
-    };
 
     public int getDataBaseId (){
         return dataBaseId;

@@ -34,7 +34,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-
 public class DetailActivity extends AppCompatActivity implements TrailersAdapter.TrailerClickListener {
 
 
@@ -47,6 +46,7 @@ public class DetailActivity extends AppCompatActivity implements TrailersAdapter
     private ArrayList<Reviews> reviews;
     private RecyclerView mReviewsRecyclerView;
     private ReviewsAdapter mAdapter;
+    private TextView mNoReviews;
 
     private AppDataBase mDb;
 
@@ -72,9 +72,9 @@ public class DetailActivity extends AppCompatActivity implements TrailersAdapter
 
         reviews = new ArrayList<>();
         mReviewsRecyclerView = (RecyclerView) findViewById(R.id.rv_reviews_detail);
+        mNoReviews = (TextView) findViewById(R.id.tv_no_reviews);
 
         mDb = AppDataBase.getInstance(this);
-
 
 
         Intent intent = getIntent();
@@ -96,12 +96,11 @@ public class DetailActivity extends AppCompatActivity implements TrailersAdapter
             favoriteFab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-click();
+                    click();
 
                 }
             });
         }
-
 
 
         LinearLayoutManager trailersLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -116,16 +115,16 @@ click();
 
     }
 
-    public void setFavoriteFab (final int id){
+    public void setFavoriteFab(final int id) {
         DetailViewModelFactory factory = new DetailViewModelFactory(mDb, id);
         final DetailViewModel viewModel = ViewModelProviders.of(this, factory).get(DetailViewModel.class);
         viewModel.getMovie().observe(this, new Observer<Movies>() {
             @Override
             public void onChanged(@Nullable Movies moviesDb) {
-                if (moviesDb == null){
+                if (moviesDb == null) {
                     isClicked = false;
                     favoriteFab.setImageResource(R.drawable.heart_favorite_border_black);
-                } else if (moviesDb.getMovieId() == movies.getMovieId()){
+                } else if (moviesDb.getMovieId() == movies.getMovieId()) {
                     favoriteFab.setImageResource(R.drawable.heart_favorite_black);
                     isClicked = true;
                 }
@@ -133,7 +132,7 @@ click();
         });
     }
 
-    public void click (){
+    public void click() {
         if (isClicked) {
             MoviesExecutor.getInstance().diskIO().execute(new Runnable() {
                 @Override
@@ -142,16 +141,18 @@ click();
 
                 }
             });
+            Toast.makeText(this, getString(R.string.removed), Toast.LENGTH_LONG).show();
             isClicked = false;
 
-        } else {MoviesExecutor.getInstance().diskIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                mDb.moviesDao().addMovie(movies);
+        } else {
+            MoviesExecutor.getInstance().diskIO().execute(new Runnable() {
+                @Override
+                public void run() {
+                    mDb.moviesDao().addMovie(movies);
 
-            }
-        });
-            Toast.makeText(this, "added", Toast.LENGTH_LONG).show();
+                }
+            });
+            Toast.makeText(this, getString(R.string.added), Toast.LENGTH_LONG).show();
             isClicked = true;
 
         }
@@ -163,6 +164,11 @@ click();
 
     public void loadReviews(URL url) {
         new fetchReviews().execute(url);
+    }
+
+    private void showNoReviews() {
+        mReviewsRecyclerView.setVisibility(View.INVISIBLE);
+        mNoReviews.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -218,9 +224,13 @@ click();
 
         @Override
         protected void onPostExecute(ArrayList<Reviews> reviews) {
-            ReviewsAdapter reviewsAdapter = new ReviewsAdapter(reviews);
-            mReviewsRecyclerView.setAdapter(reviewsAdapter);
+            if (reviews != null) {
+                ReviewsAdapter reviewsAdapter = new ReviewsAdapter(reviews);
+                mReviewsRecyclerView.setAdapter(reviewsAdapter);
 
+            } else {
+                showNoReviews();
+            }
         }
     }
 }
